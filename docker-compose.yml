@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  web:
+    image: nginx:latest
+    ports:
+        - "8080:80"
+    volumes:
+        - ./src:/var/www/html
+        - ./nginx:/etc/nginx/conf.d/
+    links:
+        - php
+    depends_on:
+        - php
+  php:
+    image: php:8.0.12-fpm-alpine3.13
+    volumes:
+      - ./src:/var/www/html
+      - ./php:/usr/local/etc/php/php.ini
+  
+
+  
